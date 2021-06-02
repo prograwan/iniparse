@@ -1,7 +1,7 @@
-This is a C/C + + structure serialization/deserialization framework, its use is very simple and efficient, does not add any mental burden¡£
+This is a C/C + + structure serialization/deserialization framework, its use is very simple and efficient, does not add any mental burden.
 
 exp1:
-	at iniparse.c::iniparse_test function is a very complicated comprehensive test cases¡£
+	at iniparse.c::iniparse_test function is a very complicated comprehensive test cases.
 	
 exp2:
 	//define struct inimsg2
