@@ -30,7 +30,7 @@ THE SOFTWARE.
 // FullName:  ini_correction_memory_impl
 // Access:    public 
 // Returns:   int
-// Qualifier: Âú×ãÖ¸¶¨ÄÚ´æĞèÇó
+// Qualifier: æ»¡è¶³æŒ‡å®šå†…å­˜éœ€æ±‚
 // Parameter: void * * ptr
 // Parameter: int oldsize
 // Parameter: int newsize
@@ -54,15 +54,15 @@ int ini_correction_memory_impl(void**ptr, int oldsize, int newsize) {
 	return s;
 }
 
-//Ê¹ÓÃÄ¬ÈÏÄÚÖÃÌá¹©µÄËã·¨½á¹¹
+//ä½¿ç”¨é»˜è®¤å†…ç½®æä¾›çš„ç®—æ³•ç»“æ„
 #if (defined(INIPORTENABLE) && INIPORTENABLE!=0)
-//»ñÈ¡listÖ¸¶¨Ë÷ÒıÏî
+//è·å–listæŒ‡å®šç´¢å¼•é¡¹
 #define         ini_list_get_item(head,index)  ((ini_list_type*)({int z = 0x00,aindex=index;if(aindex<0){aindex=(head)->count-((aindex*(-1))%((head)->count));}ini_list_type *item = head;for(;z < aindex; z++) {item = item->next;}item;}))
-//»ñÈ¡listÖ¸¶¨Ë÷ÒıÏîÖ¸ÏòµÄÄÚ´æµØÖ·
+//è·å–listæŒ‡å®šç´¢å¼•é¡¹æŒ‡å‘çš„å†…å­˜åœ°å€
 #define         ini_list_object(head,index,type)    ((type)(ini_list_get_item(head,index)->data))     
-//Ñ­»··ÃÎÊlistÁĞ±í,vÊÇµü´úÆ÷£¬ÀàĞÍÊÇini_list_type*
+//å¾ªç¯è®¿é—®liståˆ—è¡¨,væ˜¯è¿­ä»£å™¨ï¼Œç±»å‹æ˜¯ini_list_type*
 #define         ini_list_foreach(list,v)        for(ini_list_type *v = list->next;list&&v;v=v->next)    
-//Ñ­»··ÃÎÊlistÁĞ±í,typeÖ¸¶¨Ä¿±êÖ¸¶¨µÄÀàĞÍ,vÊÇÄ¿±êÀàĞÍµü´úÆ÷
+//å¾ªç¯è®¿é—®liståˆ—è¡¨,typeæŒ‡å®šç›®æ ‡æŒ‡å®šçš„ç±»å‹,væ˜¯ç›®æ ‡ç±»å‹è¿­ä»£å™¨
 #define         ini_list_foreach_object(list,type,v)        for(type v = (type)((list)->next->data),*v##__temp = (type)((list)->next);(list)&&(list)->count>0&&v##__temp;\
                                                                 v##__temp=(v##__temp==NULL)?NULL:((type)(((ini_list_type*)v##__temp)->next)),v=(v##__temp==NULL?NULL:((type)(((ini_list_type*)v##__temp)->data))))
 
@@ -71,7 +71,7 @@ int ini_correction_memory_impl(void**ptr, int oldsize, int newsize) {
 // FullName:  ini_list_clear
 // Access:    public 
 // Returns:   int
-// Qualifier: Çå³ıÁĞ±íÏî£¬²¢ÊÍ·ÅdataÖ¸ÏòµÄÄÚ´æ£¨Èç¹û²»Îª¿Õ£©
+// Qualifier: æ¸…é™¤åˆ—è¡¨é¡¹ï¼Œå¹¶é‡Šæ”¾dataæŒ‡å‘çš„å†…å­˜ï¼ˆå¦‚æœä¸ä¸ºç©ºï¼‰
 // Parameter: ini_list_type * _list
 //************************************
 int ini_list_clear(ini_list_type *_list)
@@ -92,7 +92,7 @@ int ini_list_clear(ini_list_type *_list)
 // FullName:  ini_list_del
 // Access:    public 
 // Returns:   int
-// Qualifier: Çå³ıÁĞ±íÏî£¬²¢ÊÍ·ÅdataÖ¸ÏòµÄÄÚ´æ£¨Èç¹û²»Îª¿Õ£©£¬ÊÍ·Ålist½ÚµãÄÚ´æ
+// Qualifier: æ¸…é™¤åˆ—è¡¨é¡¹ï¼Œå¹¶é‡Šæ”¾dataæŒ‡å‘çš„å†…å­˜ï¼ˆå¦‚æœä¸ä¸ºç©ºï¼‰ï¼Œé‡Šæ”¾listèŠ‚ç‚¹å†…å­˜
 // Parameter: ini_list_type * _list
 //************************************
 int ini_list_del(ini_list_type *_list) { if (_list == NULL)return 0x00; ini_list_clear(_list); return 1; }
@@ -101,7 +101,7 @@ int ini_list_del(ini_list_type *_list) { if (_list == NULL)return 0x00; ini_list
 // FullName:  ini_list_push
 // Access:    public 
 // Returns:   int
-// Qualifier: ´´½¨Ò»¸ö½Úµã×·¼Óµ½list×îºó£¬²¢½«½ÚµãÄÚ´æÖ¸ÏòdataÄÚ´æ£¬±ê¼Ç´Ë½ÚµãdataÖ¸ÏòµÄÄÚ´æ´óĞ¡Î´count
+// Qualifier: åˆ›å»ºä¸€ä¸ªèŠ‚ç‚¹è¿½åŠ åˆ°listæœ€åï¼Œå¹¶å°†èŠ‚ç‚¹å†…å­˜æŒ‡å‘dataå†…å­˜ï¼Œæ ‡è®°æ­¤èŠ‚ç‚¹dataæŒ‡å‘çš„å†…å­˜å¤§å°æœªcount
 // Parameter: ini_list_type * _list
 // Parameter: const void * data
 // Parameter: unsigned int count
@@ -129,7 +129,7 @@ int ini_list_push(ini_list_type *_list, const void * data, unsigned int count)
 	add_node->count = count;
 	add_node->data = (uchar*)data;
 	_list->count += 0x01;
-	if (node == NULL)//¶ÓÁĞ¿Õ
+	if (node == NULL)//é˜Ÿåˆ—ç©º
 		_list->next = add_node;
 	else
 		node->next = add_node;
@@ -141,10 +141,10 @@ int ini_list_push(ini_list_type *_list, const void * data, unsigned int count)
 // FullName:  ini_list_head
 // Access:    public 
 // Returns:   ini_list_type *
-// Qualifier: ´´½¨Ò»¸ölist½ÚµãÍ·
+// Qualifier: åˆ›å»ºä¸€ä¸ªlistèŠ‚ç‚¹å¤´
 //************************************
 ini_list_type * ini_list_head() {
-	int sc = sizeof(ini_list_type);//Ä¬ÈÏµÄÁĞ±íÊ¹ÓÃÍ³Ò»µÄ×ÊÔ´Ëø£¬ÓÃ²»µ½À©Õ¹×Ö¶Î²¿·Ö..
+	int sc = sizeof(ini_list_type);//é»˜è®¤çš„åˆ—è¡¨ä½¿ç”¨ç»Ÿä¸€çš„èµ„æºé”ï¼Œç”¨ä¸åˆ°æ‰©å±•å­—æ®µéƒ¨åˆ†..
 	ini_list_type * inode = (ini_list_type *)inimalloc(sc);
 	memset(inode, 0x00, sc);
 	return (ini_list_type*)inode;
@@ -154,7 +154,7 @@ ini_list_type * ini_list_head() {
 // FullName:  ini_list_join
 // Access:    public 
 // Returns:   int
-// Qualifier: ºÏ²¢dataÁĞ±íÖÁlistÁĞ±í..
+// Qualifier: åˆå¹¶dataåˆ—è¡¨è‡³liståˆ—è¡¨..
 // Parameter: ini_list_type * list
 // Parameter: ini_list_type * data
 //************************************
@@ -172,7 +172,7 @@ int ini_list_join(ini_list_type *list, ini_list_type *data)
 // FullName:  ini_list_reset
 // Access:    public 
 // Returns:   int
-// Qualifier: Çå¿ÕÁĞ±í£¬µ«²»ÊÍ·ÅdataÖ¸ÏòµÄÄÚ´æ¿Õ¼ä
+// Qualifier: æ¸…ç©ºåˆ—è¡¨ï¼Œä½†ä¸é‡Šæ”¾dataæŒ‡å‘çš„å†…å­˜ç©ºé—´
 // Parameter: ini_list_type * _list
 //************************************
 int ini_list_reset(ini_list_type *_list)
@@ -199,11 +199,11 @@ int ini_list_reset(ini_list_type *_list)
 // FullName:  ini_list_push_for_data
 // Access:    public 
 // Returns:   int
-// Qualifier: ¼ÓÈëÒ»¸ö½Úµãµ½list×îºó£¨Ê¹ÓÃ¿½±´¸±±¾µÄ·½Ê½£©
+// Qualifier: åŠ å…¥ä¸€ä¸ªèŠ‚ç‚¹åˆ°listæœ€åï¼ˆä½¿ç”¨æ‹·è´å‰¯æœ¬çš„æ–¹å¼ï¼‰
 // Parameter: ini_list_type * _list
-// Parameter: const void * data ÒıÓÃµÄÄ¿±ê
-// Parameter: unsigned int offset Ïà¶ÔÄ¿±êµÄÄÚ´æÆ«ÒÆ
-// Parameter: unsigned int len	¿½±´µÄ³¤¶È£¨×Ö½Ú£©
+// Parameter: const void * data å¼•ç”¨çš„ç›®æ ‡
+// Parameter: unsigned int offset ç›¸å¯¹ç›®æ ‡çš„å†…å­˜åç§»
+// Parameter: unsigned int len	æ‹·è´çš„é•¿åº¦ï¼ˆå­—èŠ‚ï¼‰
 //************************************
 int ini_list_push_for_data(ini_list_type *_list, const void  *data, unsigned int offset, unsigned int len)
 {
@@ -224,7 +224,7 @@ int ini_list_push_for_data(ini_list_type *_list, const void  *data, unsigned int
 // FullName:  ini_list_find_at
 // Access:    public 
 // Returns:   ini_list_type *
-// Qualifier: ²éÕÒÖ¸¶¨Ë÷ÒıµÄÁĞ±í½Úµã
+// Qualifier: æŸ¥æ‰¾æŒ‡å®šç´¢å¼•çš„åˆ—è¡¨èŠ‚ç‚¹
 // Parameter: ini_list_type * _list
 // Parameter: int index
 //************************************
@@ -265,11 +265,11 @@ int __ini_strtok_fix(const char * str, int lindex, int findex, int i, char **re)
 	for (int j = 0; j < len; j++)
 	{
 		if (j == (findex - lindex - 1) || (str[j + start] == '\\' && str[j + start + 1] == '\"'))
-			continue;//ÕâÊÇ¿ªÊ¼µÄÎ»ÖÃ..
+			continue;//è¿™æ˜¯å¼€å§‹çš„ä½ç½®..
 		else if (j > 0 && str[j + start] == '\"' && str[j + start - 1] != '\\') {
-			continue;//ÕâÒ»°ãÊÇ"µÄ¿ªÍ·he½áÎ²..
+			continue;//è¿™ä¸€èˆ¬æ˜¯"çš„å¼€å¤´heç»“å°¾..
 		}
-		//Õâ²ÅÊÇºÏ·¨µÄÊı¾İ×Ö·û..
+		//è¿™æ‰æ˜¯åˆæ³•çš„æ•°æ®å­—ç¬¦..
 		item[hlen++] = str[j + start];
 	}
 	item[hlen] = 0x00;
@@ -287,11 +287,11 @@ int __ini_strtok_fix(const char * str, int lindex, int findex, int i, char **re)
 // FullName:  __ini_ll_strtok
 // Access:    public 
 // Returns:   ini_list_type *
-// Qualifier: ·Ö¸î×Ö·û´®£¬ÒÔÖ¸¶¨×Ö·û¼¯ºÏ·Ö¸î
-// Parameter: const char * str	´ı·Ö¸î×Ö·û´®
-// Parameter: int _len	strÄÜ¹»½øĞĞ·Ö¸îµÄ×î´ó³¤¶È£¬=-1Ê±·Ö¸îÕû¸ö×Ö·û´®·ñÔò·Ö¸îÖ¸¶¨µÄ²¿·Ö
-// Parameter: uint isfilterempty ÊÇ·ñ¹ıÂË¿Õ
-// Parameter: const char * rex ·Ö¸î×Ö·û¼¯ºÏ
+// Qualifier: åˆ†å‰²å­—ç¬¦ä¸²ï¼Œä»¥æŒ‡å®šå­—ç¬¦é›†åˆåˆ†å‰²
+// Parameter: const char * str	å¾…åˆ†å‰²å­—ç¬¦ä¸²
+// Parameter: int _len	strèƒ½å¤Ÿè¿›è¡Œåˆ†å‰²çš„æœ€å¤§é•¿åº¦ï¼Œ=-1æ—¶åˆ†å‰²æ•´ä¸ªå­—ç¬¦ä¸²å¦åˆ™åˆ†å‰²æŒ‡å®šçš„éƒ¨åˆ†
+// Parameter: uint isfilterempty æ˜¯å¦è¿‡æ»¤ç©º
+// Parameter: const char * rex åˆ†å‰²å­—ç¬¦é›†åˆ
 //************************************
 ini_list_type * __ini_ll_strtok(const char * str, int _len, uint isfilterempty, const char *rex) {
 	ini_list_type * list = ini_list_head();
@@ -308,17 +308,17 @@ ini_list_type * __ini_ll_strtok(const char * str, int _len, uint isfilterempty, 
 			if (i > 0 && str[i - 1] != '\\') {
 				size++;
 				if (findex < 0)
-					findex = i;//¼ÇÂ¼µÚÒ»¸ö"µÄÎ»ÖÃ..
+					findex = i;//è®°å½•ç¬¬ä¸€ä¸ª"çš„ä½ç½®..
 			}
 		}
 		if (size % 2 == 1)
-			continue;//×Ö´®ÄÚ²¿..²»ÓÃÆ¥Åä..
+			continue;//å­—ä¸²å†…éƒ¨..ä¸ç”¨åŒ¹é…..
 		if ((x = (char *)strchr(rex, str[i])) == NULL)
 			continue;
-		if (i - 1 == lindex) {//Á¬ĞøÃüÖĞ
+		if (i - 1 == lindex) {//è¿ç»­å‘½ä¸­
 			lindex++;
 			if (isfilterempty == 0) {
-				//¼ÓÈëÒ»¸ö¿Õ´®µ½ÁĞ±í
+				//åŠ å…¥ä¸€ä¸ªç©ºä¸²åˆ°åˆ—è¡¨
 				char *np = (char *)inimalloc(1);
 				if (np) {
 					np[0] = 0x00;
@@ -327,8 +327,8 @@ ini_list_type * __ini_ll_strtok(const char * str, int _len, uint isfilterempty, 
 			}
 			continue;
 		}
-		//ÄÇÃ´lindex+1<---------->i-1¾ÍÊÇÒ»¸öĞÂµÄ×Ö·û´®..
-		//¼ÓÈëÁĞ±í..
+		//é‚£ä¹ˆlindex+1<---------->i-1å°±æ˜¯ä¸€ä¸ªæ–°çš„å­—ç¬¦ä¸²..
+		//åŠ å…¥åˆ—è¡¨..
 		len = i - lindex - 1;
 		if (len > 0)
 		{
@@ -351,7 +351,7 @@ ini_list_type * __ini_ll_strtok(const char * str, int _len, uint isfilterempty, 
 		item = NULL;
 	}
 	INI_ERR_ASSERT_CATCH();
-	//½øĞĞÒì³£´¦Àí..
+	//è¿›è¡Œå¼‚å¸¸å¤„ç†..
 	if (list) {
 		ini_list_del(list);
 		list = NULL;
@@ -371,7 +371,7 @@ ini_list_type * __ini_ll_strtok(const char * str, int _len, uint isfilterempty, 
 // FullName:  inidel
 // Access:    public 
 // Returns:   int
-// Qualifier: É¾³ı²¢ÊÍ·ÅÔËĞĞÊ±ÁĞ±í
+// Qualifier: åˆ é™¤å¹¶é‡Šæ”¾è¿è¡Œæ—¶åˆ—è¡¨
 // Parameter: ini_list_type * dlist
 //************************************
 int inidel(ini_list_type *dlist) {
@@ -382,7 +382,7 @@ int inidel(ini_list_type *dlist) {
 			inidel(x->items);
 		}
 		inifree(x);
-		((ini_list_type*)x__temp)->data = NULL;//ÒÑ¾­ÌáÇ°ÊÍ·ÅÁËÄÚ´æ..
+		((ini_list_type*)x__temp)->data = NULL;//å·²ç»æå‰é‡Šæ”¾äº†å†…å­˜..
 	}
 	ini_list_del(dlist);
 	return 1;
@@ -393,13 +393,13 @@ int inidel(ini_list_type *dlist) {
 // FullName:  initostring
 // Access:    public 
 // Returns:   int
-// Qualifier: ½«Ä¿±êÄÚ´æÒÔÖ¸¶¨ÀàĞÍ×ª»»³É×Ö·û´®
-// Parameter: iniitem * x ÀàĞÍĞÅÏ¢
-// Parameter: void * ptr Ä¿±êÄÚ´æÖ¸Õë
-// Parameter: char * buf ×Ö·û´®´æ·ÅÖ¸Õë
+// Qualifier: å°†ç›®æ ‡å†…å­˜ä»¥æŒ‡å®šç±»å‹è½¬æ¢æˆå­—ç¬¦ä¸²
+// Parameter: iniitem * x ç±»å‹ä¿¡æ¯
+// Parameter: void * ptr ç›®æ ‡å†…å­˜æŒ‡é’ˆ
+// Parameter: char * buf å­—ç¬¦ä¸²å­˜æ”¾æŒ‡é’ˆ
 //************************************
 int initostring(iniitem *x, void *ptr, char *buf) {
-	//½«Æ÷×ª»»³É×Ö·û´®¸ñÊ½..
+	//å°†å™¨è½¬æ¢æˆå­—ç¬¦ä¸²æ ¼å¼..
 	int re = 0;
 	switch (x->type&INI_TYPE_ALL)
 	{
@@ -416,7 +416,7 @@ int initostring(iniitem *x, void *ptr, char *buf) {
 		re = sprintf(buf, INIFFMTSTR, INIFFMTVAL(*((float*)ptr)));
 	}break;
 	case INI_TYPE_DOUBLE: {
-		re = sprintf(buf, INIFFMTSTR, INIFFMTVAL((float)(*((double*)ptr))));//Ä¿Ç°Ã»ÓĞºÃµÄ°ì·¨½øĞĞĞòÁĞ»¯£¬Ö»ÄÜÊ¹ÓÃfloat´úÌæ
+		re = sprintf(buf, INIFFMTSTR, INIFFMTVAL((float)(*((double*)ptr))));//ç›®å‰æ²¡æœ‰å¥½çš„åŠæ³•è¿›è¡Œåºåˆ—åŒ–ï¼Œåªèƒ½ä½¿ç”¨floatä»£æ›¿
 	}break;
 	case INI_TYPE_LONG: {
 		re = sprintf(buf, "%ld", *((long*)ptr));
@@ -425,18 +425,18 @@ int initostring(iniitem *x, void *ptr, char *buf) {
 		re = strlen((char*)ptr);
 		if (re <= 0)
 			return re;
-		//´Ë´¦ĞèÒª×ªÒÆ·ÀÖ¹×Ö·û´®ÖĞĞ¯´øÁË×ªÒå×Ö·û'\'
+		//æ­¤å¤„éœ€è¦è½¬ç§»é˜²æ­¢å­—ç¬¦ä¸²ä¸­æºå¸¦äº†è½¬ä¹‰å­—ç¬¦'\'
 		if (strstr((char*)ptr, "\n") == NULL) {
 			memcpy(buf, ptr, re);
 			return re;
 		}
-		//ĞèÒª½øĞĞ×ªÒå£¬·ñÔò´æ´¢ºó»á³öÏÖÆçÒå..
+		//éœ€è¦è¿›è¡Œè½¬ä¹‰ï¼Œå¦åˆ™å­˜å‚¨åä¼šå‡ºç°æ­§ä¹‰..
 		char *str = (char *)ptr;
 		int al = 0;
 		for (int i = 0, j = 0; j < re; i++, j++)
 		{
 			if (str[j] == '\n' || str[j] == '\r' || str[j] == '\\') {
-				buf[i++] = '\\';//Òş²Ø×ªÒå..
+				buf[i++] = '\\';//éšè—è½¬ä¹‰..
 				al++;
 				if (str[j] == '\n')
 					buf[i] = 'n';
@@ -452,7 +452,7 @@ int initostring(iniitem *x, void *ptr, char *buf) {
 		}
 		return re + al;
 	}break;
-	default:return -1;//²»Ö§³ÖµÄÀàĞÍ..
+	default:return -1;//ä¸æ”¯æŒçš„ç±»å‹..
 	}
 
 	return re;
@@ -462,7 +462,7 @@ int initostring(iniitem *x, void *ptr, char *buf) {
 // FullName:  inifiledgetsize
 // Access:    public 
 // Returns:   int
-// Qualifier: »ñÈ¡»ù±¾Êı¾İÀàĞÍµÄÄÚ´æ´óĞ¡
+// Qualifier: è·å–åŸºæœ¬æ•°æ®ç±»å‹çš„å†…å­˜å¤§å°
 // Parameter: int type
 //************************************
 int inifiledgetsize(int type) {
@@ -486,7 +486,7 @@ int inifiledgetsize(int type) {
 // FullName:  initypescan
 // Access:    public 
 // Returns:   ini_type
-// Qualifier: É¨Ãè»ñÈ¡Êı¾İÀàĞÍ£¬²¢·µ»ØÃ¶¾Ù
+// Qualifier: æ‰«æè·å–æ•°æ®ç±»å‹ï¼Œå¹¶è¿”å›æšä¸¾
 // Parameter: const char * s
 //************************************
 ini_type initypescan(const char *s) {
@@ -520,13 +520,13 @@ ini_type initypescan(const char *s) {
 // FullName:  inifindstructdata
 // Access:    public 
 // Returns:   ini_list_type *
-// Qualifier: É¨Ãè»ñÈ¡Ò»¸ö×Ó½á¹¹ÌåµÄÔËĞĞÊ±ĞÅÏ¢
-// Parameter: ini_list_type * list ×Ö·û´®·Ö¸îºóµÄÁĞ±í
+// Qualifier: æ‰«æè·å–ä¸€ä¸ªå­ç»“æ„ä½“çš„è¿è¡Œæ—¶ä¿¡æ¯
+// Parameter: ini_list_type * list å­—ç¬¦ä¸²åˆ†å‰²åçš„åˆ—è¡¨
 // Parameter: const char * name
-// Parameter: int * alignsize ×Ó½á¹¹ÄÚ´æ¶ÔÆëµ¥Î»
+// Parameter: int * alignsize å­ç»“æ„å†…å­˜å¯¹é½å•ä½
 //************************************
 ini_list_type *inifindstructdata(ini_list_type *list, const char *name, int *alignsize) {
-	//·µ»Ø´Ë×Ó½á¹¹×î´ó³ÉÔ±´óĞ¡..
+	//è¿”å›æ­¤å­ç»“æ„æœ€å¤§æˆå‘˜å¤§å°..
 	int sc = 0, ass = 0, av;
 	ini_list_type *father = NULL;
 	ini_type type = 0;
@@ -541,7 +541,7 @@ ini_list_type *inifindstructdata(ini_list_type *list, const char *name, int *ali
 					sc++;
 				}
 				else if (father != NULL && (!INI_STR_CS("struct", father->data)) && sc > 0) {
-					//½á¹¹ÌåµÄµÚÒ»¸ö½ÚµãÊÇÀàĞÍÃû..
+					//ç»“æ„ä½“çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹æ˜¯ç±»å‹å..
 					sc--;
 					if (sc == 0) {
 						if (alignsize != NULL)
@@ -552,7 +552,7 @@ ini_list_type *inifindstructdata(ini_list_type *list, const char *name, int *ali
 			}
 			else {
 				if ((av = inifiledgetsize(type)) > ass)
-					ass = av;//±£Áô×î´óµÄ³ÉÔ±³ß´ç..
+					ass = av;//ä¿ç•™æœ€å¤§çš„æˆå‘˜å°ºå¯¸..
 				list = list->next;
 			}
 
@@ -567,7 +567,7 @@ ini_list_type *inifindstructdata(ini_list_type *list, const char *name, int *ali
 // FullName:  inimakeitem
 // Access:    public 
 // Returns:   int
-// Qualifier: ¸ù¾İ¸ø¶¨µÄĞÅÏ¢¹¹ÔìÒ»¸öÔËĞĞÊ±ĞÅÏ¢½Úµã£¬´Ë½Úµã°üº¬ÁËÒ»¸ö×Ö¶ÎµÄÈ«²¿ÃèÊöĞÅÏ¢
+// Qualifier: æ ¹æ®ç»™å®šçš„ä¿¡æ¯æ„é€ ä¸€ä¸ªè¿è¡Œæ—¶ä¿¡æ¯èŠ‚ç‚¹ï¼Œæ­¤èŠ‚ç‚¹åŒ…å«äº†ä¸€ä¸ªå­—æ®µçš„å…¨éƒ¨æè¿°ä¿¡æ¯
 // Parameter: ini_list_type * list
 // Parameter: const char * tag
 // Parameter: const char * names
@@ -581,15 +581,15 @@ int inimakeitem(ini_list_type *list, const char *tag, const char *names, int typ
 	int isarray = 0, cnt = 1;
 	const char * fs = 0, *fe = 0;
 	ini_list_foreach_object(ff, char *, name) {
-		//¼ÆËãÃ¿Ò»¸ö×Ö¶Î£¬Èç:int x,y,z;
-		//ÅĞ¶Ïµ±Ç°×Ö¶ÎÊÇ·ñÎªÒ»¸öÊı×é:Èçz[2]
+		//è®¡ç®—æ¯ä¸€ä¸ªå­—æ®µï¼Œå¦‚:int x,y,z;
+		//åˆ¤æ–­å½“å‰å­—æ®µæ˜¯å¦ä¸ºä¸€ä¸ªæ•°ç»„:å¦‚z[2]
 		cnt = 1;
 		isarray = ((fs = strstr(name, "[")) != NULL && (fe = strstr(name, "]")) != NULL) ? 1 : 0;
 		if (isarray != 0) {
-			//½«nameÖĞµÄ[]±ê¼ÇÉ¾³ı..
+			//å°†nameä¸­çš„[]æ ‡è®°åˆ é™¤..
 			name[((uint)fe) - (uint)name] = 0x00;
-			cnt = atoi(fs + 1);//¼ÆËã¸öÊı
-			name[((uint)fs) - (uint)name] = 0x00;//¸ø¶¨ÕıÈ·µÄÃû×Ö..
+			cnt = atoi(fs + 1);//è®¡ç®—ä¸ªæ•°
+			name[((uint)fs) - (uint)name] = 0x00;//ç»™å®šæ­£ç¡®çš„åå­—..
 
 		}
 		size = inifiledgetsize(type);
@@ -602,7 +602,7 @@ int inimakeitem(ini_list_type *list, const char *tag, const char *names, int typ
 		x->size = size;
 		x->type = type | ((cnt > 1&&((type&INI_TYPE_STRING)!= INI_TYPE_STRING)) ? (INI_TYPE_ARRAY) : 0);
 		if (size > 1 && (((*offset) % size) != 0)) {
-			//Ã»ÓĞ¶ÔÆëÄÚ´æ..
+			//æ²¡æœ‰å¯¹é½å†…å­˜..
 			offset[0] += (size - (offset[0] % size));
 		}
 		x->offset = *offset;
@@ -619,13 +619,13 @@ int inimakeitem(ini_list_type *list, const char *tag, const char *names, int typ
 // FullName:  inimemcmp
 // Access:    public 
 // Returns:   int
-// Qualifier: È·ÈÏÒ»¶ÎÄÚ´æÊÇ·ñÈ«²¿Î´Ò»¸ö¹Ì¶¨µÄÖµ
+// Qualifier: ç¡®è®¤ä¸€æ®µå†…å­˜æ˜¯å¦å…¨éƒ¨æœªä¸€ä¸ªå›ºå®šçš„å€¼
 // Parameter: const void * ptr
 // Parameter: uchar tt
 // Parameter: int len
 //************************************
 int inimemcmp(const void *ptr, uchar tt, int len) {
-	//¶ÔÖ¸¶¨µØÖ·È·ÈÏÊÇ·ñÈ«²¿ÎªttµÄÖµ..
+	//å¯¹æŒ‡å®šåœ°å€ç¡®è®¤æ˜¯å¦å…¨éƒ¨ä¸ºttçš„å€¼..
 	uchar *p = (uchar *)ptr;
 	for (int i = 0; i < len; i++)
 	{
@@ -639,7 +639,7 @@ int inimemcmp(const void *ptr, uchar tt, int len) {
 // FullName:  iniconvert
 // Access:    public 
 // Returns:   ini_list_type*
-// Qualifier: ½«×Ö·û´®·Ö¸îºóµÄÁĞ±í×ª»»³ÉiniitemÔËĞĞÊ±ÁĞ±í
+// Qualifier: å°†å­—ç¬¦ä¸²åˆ†å‰²åçš„åˆ—è¡¨è½¬æ¢æˆiniitemè¿è¡Œæ—¶åˆ—è¡¨
 // Parameter: ini_list_type * list
 // Parameter: const char * tag
 // Parameter: int * offset
@@ -669,49 +669,49 @@ ini_list_type* iniconvert(ini_list_type *list, const char *tag, int *offset) {
 	iniitem *it = NULL;
 	for (ini_list_type *temp = list->next; temp&&temp->next; temp = temp->next)
 	{
-		//Ê¶±ğÀàĞÍ..
+		//è¯†åˆ«ç±»å‹..
 		t = initypescan(temp->data);
 		if (t == INI_TYPE_ALL) {
-			//ÎŞ·¨Ê¶±ğµÄÀàĞÍ..
-			//ĞèÒªÈ·ÈÏÊÇ·ñÎ´"struct"
+			//æ— æ³•è¯†åˆ«çš„ç±»å‹..
+			//éœ€è¦ç¡®è®¤æ˜¯å¦æœª"struct"
 			if (!INI_STR_CS("struct", temp->data))
 				goto OVER;
-			//ÕâÊÇÒ»¸ö½á¹¹Ìå..
-			//ĞèÒª½â¾ö½á¹¹Ìå¶à±äÁ¿¶¨ÒåÎÊÌâ
+			//è¿™æ˜¯ä¸€ä¸ªç»“æ„ä½“..
+			//éœ€è¦è§£å†³ç»“æ„ä½“å¤šå˜é‡å®šä¹‰é—®é¢˜
 			//exp:struct{int x;}a,b,c[5];
-			//´ËÊ±»ñÈ¡µ½µÄsname="a,b,c,[5]"
-			//ĞèÒª½«snameÕë¶Ô",½øĞĞ·Ö¸îºóÖğÒ»½øĞĞ·Ö²¼¼ì²é"
-			//µ±Ç°Ä¬ÈÏ²»Ö§³Ö½á¹¹ÌåÊı×é³öÏÖ..
-			ini_list_type *sname = inifindstructdata(temp, NULL, &alignsize);//²éÕÒµ±Ç°½á¹¹ÌåµÄ×Ö¶ÎÃû³Æ..
+			//æ­¤æ—¶è·å–åˆ°çš„sname="a,b,c,[5]"
+			//éœ€è¦å°†snameé’ˆå¯¹",è¿›è¡Œåˆ†å‰²åé€ä¸€è¿›è¡Œåˆ†å¸ƒæ£€æŸ¥"
+			//å½“å‰é»˜è®¤ä¸æ”¯æŒç»“æ„ä½“æ•°ç»„å‡ºç°..
+			ini_list_type *sname = inifindstructdata(temp, NULL, &alignsize);//æŸ¥æ‰¾å½“å‰ç»“æ„ä½“çš„å­—æ®µåç§°..
 			if (sname == NULL)
 				goto ERR;
 			ini_list_type *vs = ini_strtok(sname->data, ",");
-			ini_list_foreach_object(vs, const char *, vname) {//¹¹½¨Ã¿Ò»¸ö±äÁ¿µÄÌØÕ÷ĞÅÏ¢
+			ini_list_foreach_object(vs, const char *, vname) {//æ„å»ºæ¯ä¸€ä¸ªå˜é‡çš„ç‰¹å¾ä¿¡æ¯
 				int skl = strlen(stag);
 				it = inimalloc(sizeof(iniitem) + strlen(vname) + skl + 4);
-				it->name = ((uchar *)it) + sizeof(iniitem);//´æ´¢Õâ¸ö½ÚµãµÄÃû³Æ..
+				it->name = ((uchar *)it) + sizeof(iniitem);//å­˜å‚¨è¿™ä¸ªèŠ‚ç‚¹çš„åç§°..
 				it->type = INI_TYPE_STRUCT;
 				it->cnt = 1;
 				it->items = NULL;
-				ini_list_push(re, it, sizeof(iniitem));//¼ÓÈëÕâ¸ö½ÚµãĞÅÏ¢..
+				ini_list_push(re, it, sizeof(iniitem));//åŠ å…¥è¿™ä¸ªèŠ‚ç‚¹ä¿¡æ¯..
 				if ((sv = strstr(vname, "[")) != NULL) {
-					//ÕâÊÇÒ»¸ö½á¹¹ÌåÊı×é..
-					//ĞèÒªÔÚ×îÇ°¶Ë²åÈëÒ»¸ö½Úµã£¬ÓÃÓÚ¸æÖª½âÎöÆ÷£¬Õâ¸ö½á¹¹ÌåÊ±Ò»¸öÊı×éÔªËØ..
+					//è¿™æ˜¯ä¸€ä¸ªç»“æ„ä½“æ•°ç»„..
+					//éœ€è¦åœ¨æœ€å‰ç«¯æ’å…¥ä¸€ä¸ªèŠ‚ç‚¹ï¼Œç”¨äºå‘ŠçŸ¥è§£æå™¨ï¼Œè¿™ä¸ªç»“æ„ä½“æ—¶ä¸€ä¸ªæ•°ç»„å…ƒç´ ..
 					sv++;
 					ev = strstr(sv, "]");
 					if (ev == NULL || (((uint)sv) >= ((uint)ev))) {
 						goto ERR;
 					}
 					ev[0] = 0x00;
-					it->cnt = atoi(sv);//¼ÇÂ¼Õâ¸ö½á¹¹ÌåÊı×éµÄ×î´ó¸öÊı..
+					it->cnt = atoi(sv);//è®°å½•è¿™ä¸ªç»“æ„ä½“æ•°ç»„çš„æœ€å¤§ä¸ªæ•°..
 					sv--;
 					sv[0] = 0x00;
-					it->type |= INI_TYPE_ARRAY;//±ê¼Ç´ËÊı×éÊôĞÔ
+					it->type |= INI_TYPE_ARRAY;//æ ‡è®°æ­¤æ•°ç»„å±æ€§
 				}
 
-				//¼ÓÉÏĞÂµÄÇ°×º..
+				//åŠ ä¸Šæ–°çš„å‰ç¼€..
 				if (strlen(stag) + ((ini_list_type*)vname__temp)->count >= slen) {
-					//Ãû×ÖÌ«³¤ÁË..
+					//åå­—å¤ªé•¿äº†..
 					slen = slen * 2 + ((ini_list_type*)vname__temp)->count;
 					char *ss = inimalloc(slen);
 					if (ss == NULL)
@@ -720,13 +720,13 @@ ini_list_type* iniconvert(ini_list_type *list, const char *tag, int *offset) {
 					inifree(stag);
 					stag = ss;
 				}
-				//ºÏ³ÉĞÂµÄ¶¨Î»Â·¾¶..
+				//åˆæˆæ–°çš„å®šä½è·¯å¾„..
 
 				strcat(stag, vname);
-				strcat(stag, ".");//½á¹¹Ìå½Úµã×îºó²»ÔÙĞèÒª.·ûºÅ½áÎ²..
+				strcat(stag, ".");//ç»“æ„ä½“èŠ‚ç‚¹æœ€åä¸å†éœ€è¦.ç¬¦å·ç»“å°¾..
 				strcpy(it->name, stag);
 				ini_list_type*sb = NULL;
-				if (alignsize > 1 && ((offset[0] % alignsize) != 0)) {//½á¹¹ÌåÇ¿ÖÆ¶ÔÆëµ½Ö¸¶¨×Ö½Ú..
+				if (alignsize > 1 && ((offset[0] % alignsize) != 0)) {//ç»“æ„ä½“å¼ºåˆ¶å¯¹é½åˆ°æŒ‡å®šå­—èŠ‚..
 					offset[0] += (alignsize - (offset[0] % alignsize));
 				}
 				it->offset = offset[0];
@@ -734,24 +734,24 @@ ini_list_type* iniconvert(ini_list_type *list, const char *tag, int *offset) {
 					sb = iniconvert(temp->next, stag, offset);
 				else
 					sb = iniconvert(temp, stag, offset);
-				if (sb != NULL) {//ÕâĞ©¾ÍÊÇÈ«²¿×ÓÔªËØ.
+				if (sb != NULL) {//è¿™äº›å°±æ˜¯å…¨éƒ¨å­å…ƒç´ .
 					it->items = sb;
 				}
-				//É¾³ı×ÓÑ¡Ïî..
+				//åˆ é™¤å­é€‰é¡¹..
 				stag[skl] = 0x00;
-				if (alignsize > 1 && ((offset[0] % alignsize) != 0)) {//½á¹¹Ìå´óĞ¡Ç¿ÖÆ¶ÔÆëµ½×î´ó³ÉÔ±´óĞ¡..
+				if (alignsize > 1 && ((offset[0] % alignsize) != 0)) {//ç»“æ„ä½“å¤§å°å¼ºåˆ¶å¯¹é½åˆ°æœ€å¤§æˆå‘˜å¤§å°..
 					offset[0] += (alignsize - (offset[0] % alignsize));
 				}
-				it->size = (offset[0] - it->offset);//¼ÆËãÕâ¸ö½á¹¹ÌåÓĞ¶à´ó..
+				it->size = (offset[0] - it->offset);//è®¡ç®—è¿™ä¸ªç»“æ„ä½“æœ‰å¤šå¤§..
 				offset[0] += it->size*(it->cnt - 1);
 			}
 			temp = sname;
 			ini_list_del(vs);
 		}
-		else {//»ùÓÚstagÇ°×ºĞÂÔöÒ»¸ö½ÚµãĞÅÏ¢..
+		else {//åŸºäºstagå‰ç¼€æ–°å¢ä¸€ä¸ªèŠ‚ç‚¹ä¿¡æ¯..
 			filed = temp->next;
 			temp = temp->next;
-			//½âÎöfiled×Ö¶ÎÊÇ·ñ´æÔÚ,·Ö¸ô·û.¶¨ÒåÁË¶à¸öÍ¬ÀàĞÍ±äÁ¿£¬»òÕßÊÇ·ñÊ¹ÓÃÁËÊı×é[]ÏÂ±ê
+			//è§£æfiledå­—æ®µæ˜¯å¦å­˜åœ¨,åˆ†éš”ç¬¦.å®šä¹‰äº†å¤šä¸ªåŒç±»å‹å˜é‡ï¼Œæˆ–è€…æ˜¯å¦ä½¿ç”¨äº†æ•°ç»„[]ä¸‹æ ‡
 			inimakeitem(re, stag, filed->data, t, offset);
 		}
 	}
@@ -769,7 +769,7 @@ OVER:
 // FullName:  iniprint
 // Access:    public 
 // Returns:   void
-// Qualifier: »ùÓÚÔËĞĞÊ±ÁĞ±í´òÓ¡È«²¿½ÚµãĞÅÏ¢
+// Qualifier: åŸºäºè¿è¡Œæ—¶åˆ—è¡¨æ‰“å°å…¨éƒ¨èŠ‚ç‚¹ä¿¡æ¯
 // Parameter: ini_list_type * list
 //************************************
 void iniprint(ini_list_type *list) {
@@ -785,11 +785,11 @@ void iniprint(ini_list_type *list) {
 // FullName:  inimake
 // Access:    public 
 // Returns:   ini_list_type*
-// Qualifier: ¸ø¶¨Ò»¸ö½á¹¹ÌåÃèÊö×Ö·û´®£¬¹¹ÔìÒ»¸öiniitemÔËĞĞÊ±ÁĞ±í
+// Qualifier: ç»™å®šä¸€ä¸ªç»“æ„ä½“æè¿°å­—ç¬¦ä¸²ï¼Œæ„é€ ä¸€ä¸ªiniitemè¿è¡Œæ—¶åˆ—è¡¨
 // Parameter: const char * str
 //************************************
 ini_list_type* inimakeforstring(const char *str) {
-	//¹¹ÔìÒ»¸ö½á¹¹ÌåµÄÔËĞĞÊ±ĞÅÏ¢..
+	//æ„é€ ä¸€ä¸ªç»“æ„ä½“çš„è¿è¡Œæ—¶ä¿¡æ¯..
 	//const char *__teststr = "{ int x; int y; int z; char name[32]; struct { int d1; int d2; }data; int fs;}";
 	if (str == NULL)
 		return NULL;
@@ -800,13 +800,13 @@ ini_list_type* inimakeforstring(const char *str) {
 	ini_list_type *rs = ini_strtok(str, ";{} ");
 	if (rs == NULL)
 		return NULL;
-	//ĞèÒª½«ÎóÉËµÄ×éºÏ¶¨ÒåÁĞ±í»Ö¸´..
+	//éœ€è¦å°†è¯¯ä¼¤çš„ç»„åˆå®šä¹‰åˆ—è¡¨æ¢å¤..
 	if (strstr(str, ",") != NULL) {
 		ini_list_foreach_object(rs, char*, x)
 		{
 			ini_list_type *xt = (ini_list_type *)x__temp;
 			if (xt->next != NULL && xt->count > 1 && xt->data[xt->count - 2] == ',') {
-				//ĞèÒª½«ÏÂÒ»¸ö½ÚµãÁ´½Óµ½±¾½Úµã..
+				//éœ€è¦å°†ä¸‹ä¸€ä¸ªèŠ‚ç‚¹é“¾æ¥åˆ°æœ¬èŠ‚ç‚¹..
 				char *ss = inimalloc(xt->count + xt->next->count + 4);
 				if (ss == NULL)
 					return NULL;
@@ -823,7 +823,7 @@ ini_list_type* inimakeforstring(const char *str) {
 			}
 		}
 	}
-	//½«rs×ª»»³Éiniitem¸ñÊ½µÄÁĞ±í..
+	//å°†rsè½¬æ¢æˆiniitemæ ¼å¼çš„åˆ—è¡¨..
 	ini_list_type *re = NULL;
 	re = iniconvert(rs, NULL, NULL);
 	ini_list_del(rs);
@@ -835,9 +835,9 @@ ini_list_type* inimakeforstring(const char *str) {
 // FullName:  ini_str_find_last_pp
 // Access:    public 
 // Returns:   int
-// Qualifier: µ¹Ğò²éÕÒ'.'Â·¾¶·Ö¸î×Ö·û
+// Qualifier: å€’åºæŸ¥æ‰¾'.'è·¯å¾„åˆ†å‰²å­—ç¬¦
 // Parameter: const char * name
-// Parameter: int index µ¹ÊıµÚindex¸ö£¬-1=µ¹ÊıµÚÒ»¸ö£¬-2=µ¹ÊıµÚ¶ş¸ö,......
+// Parameter: int index å€’æ•°ç¬¬indexä¸ªï¼Œ-1=å€’æ•°ç¬¬ä¸€ä¸ªï¼Œ-2=å€’æ•°ç¬¬äºŒä¸ª,......
 //************************************
 int ini_str_find_last_pp(const char * name,int index) {
 	int pos = -1,cnt=0,size=0;
@@ -861,7 +861,7 @@ int ini_str_find_last_pp(const char * name,int index) {
 		}
 		pos = -1;
 	}
-	return pos;//ÕÒ²»µ½..
+	return pos;//æ‰¾ä¸åˆ°..
 }
 
 //************************************
@@ -869,7 +869,7 @@ int ini_str_find_last_pp(const char * name,int index) {
 // FullName:  ini_find_at
 // Access:    public 
 // Returns:   iniitem*
-// Qualifier: ÔÚÔËĞĞÊ±ÁĞ±íÖĞ²éÕÒÖ¸¶¨ÀàĞÍµÄÍ¬Ãû×Ö¶Î½ÚµãĞÅÏ¢
+// Qualifier: åœ¨è¿è¡Œæ—¶åˆ—è¡¨ä¸­æŸ¥æ‰¾æŒ‡å®šç±»å‹çš„åŒåå­—æ®µèŠ‚ç‚¹ä¿¡æ¯
 // Parameter: ini_list_type * dlists
 // Parameter: const char * name
 // Parameter: int type
@@ -895,33 +895,33 @@ iniitem*ini_find_at(ini_list_type *dlists, const char *name, int type) {
 // FullName:  iniserialize_txt_ll
 // Access:    public 
 // Returns:   char*
-// Qualifier: ĞòÁĞ»¯³ÉtxtÎÄ±¾¸ñÊ½µÄµ×²ãÊµÏÖ
-// Parameter: ini_list_type * dslists iniitemÔËĞĞÊ±ÁĞ±í
-// Parameter: const void * handle ĞèÒªĞòÁĞ»¯µÄÄ¿±êÄÚ´æÆğµã
-// Parameter: uint flag ĞòÁĞ»¯Ñ¡Ïî£¬²Î¿¼@ini_serialize_flag
-// Parameter: char * bpath ĞòÁĞ»¯µÄ»ù±¾Â·¾¶
+// Qualifier: åºåˆ—åŒ–æˆtxtæ–‡æœ¬æ ¼å¼çš„åº•å±‚å®ç°
+// Parameter: ini_list_type * dslists iniitemè¿è¡Œæ—¶åˆ—è¡¨
+// Parameter: const void * handle éœ€è¦åºåˆ—åŒ–çš„ç›®æ ‡å†…å­˜èµ·ç‚¹
+// Parameter: uint flag åºåˆ—åŒ–é€‰é¡¹ï¼Œå‚è€ƒ@ini_serialize_flag
+// Parameter: char * bpath åºåˆ—åŒ–çš„åŸºæœ¬è·¯å¾„
 //************************************
 char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,char *bpath) {
-	//½«Ä¿±êµØÖ·°´ÕÕdslistsÃèÊö½øĞĞÃ÷ÎÄĞòÁĞ»¯
+	//å°†ç›®æ ‡åœ°å€æŒ‰ç…§dslistsæè¿°è¿›è¡Œæ˜æ–‡åºåˆ—åŒ–
 	short blen = 64, slen = 0, tlen = 0, index = 0, alen = 0, re = 0,bpathlen=0;
 	char *buf = inimalloc(blen), *ref = (char *)handle;
-	//bpath£¬´æ´¢ÁË´ÓÉÏÍùÏÂµÄ»ù±¾Â·¾¶£¬ÌØ±ğÉùÃ÷£¬ÓÃÓÚĞŞÕıÊı×éÂ·¾¶´æÔÚ..
-	bpathlen = (short)strlen(bpath);//¼ÆËãµ±Ç°»ù±¾Â·¾¶µÄ³¤¶È..
+	//bpathï¼Œå­˜å‚¨äº†ä»ä¸Šå¾€ä¸‹çš„åŸºæœ¬è·¯å¾„ï¼Œç‰¹åˆ«å£°æ˜ï¼Œç”¨äºä¿®æ­£æ•°ç»„è·¯å¾„å­˜åœ¨..
+	bpathlen = (short)strlen(bpath);//è®¡ç®—å½“å‰åŸºæœ¬è·¯å¾„çš„é•¿åº¦..
 	do
 	{
 		ini_list_foreach_object(dslists, iniitem*, x) {
-			//¼ÆËãÕâ¸öÑ¡ÏîÒ»¹²ĞèÒª¶àÉÙ×Ö½ÚÄÚ´æ£¬È·ÈÏµ±Ç°µÄbufÊÇ·ñÄÜ¹»×°ÏÂ..
+			//è®¡ç®—è¿™ä¸ªé€‰é¡¹ä¸€å…±éœ€è¦å¤šå°‘å­—èŠ‚å†…å­˜ï¼Œç¡®è®¤å½“å‰çš„bufæ˜¯å¦èƒ½å¤Ÿè£…ä¸‹..
 			if ((flag&ISF_REMOVE_ZERO) && inimemcmp((char*)handle + x->offset, 0X00, x->size*x->cnt) == 0x00) {
-				//ÕâÊÇÒ»¸ö0Ìî³ä½Úµã..¿ÉÒÔ²»ÓÃ½øĞĞ´æ´¢..
+				//è¿™æ˜¯ä¸€ä¸ª0å¡«å……èŠ‚ç‚¹..å¯ä»¥ä¸ç”¨è¿›è¡Œå­˜å‚¨..
 				continue;
 			}
-			bpath[bpathlen] = 0X00;//ÖØĞÂ»Ö¸´»ù±¾Â·¾¶
+			bpath[bpathlen] = 0X00;//é‡æ–°æ¢å¤åŸºæœ¬è·¯å¾„
 			if ((x->type&INI_TYPE_ALL) == INI_TYPE_STRUCT) {
 				
 				for (index = 0, alen = x->cnt; index < alen; index++)
 				{
 					if ((flag&ISF_REMOVE_ZERO) && inimemcmp((char*)handle + x->offset + index*x->size, 0X00, x->size) == 0x00) {
-						//ÕâÊÇÒ»¸ö0Ìî³ä½Úµã..¿ÉÒÔ²»ÓÃ½øĞĞ´æ´¢..
+						//è¿™æ˜¯ä¸€ä¸ª0å¡«å……èŠ‚ç‚¹..å¯ä»¥ä¸ç”¨è¿›è¡Œå­˜å‚¨..
 						continue;
 					}
 					blen = (short)(ini_correction_memory(buf, blen, slen + strlen(x->name) + 16));
@@ -929,19 +929,19 @@ char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,
 					if (x->type&INI_TYPE_ARRAY) {
 						//slen += sprintf(buf + slen, "\n::%s", x->name) - 1;
 						//slen += sprintf(buf + slen, "[%d]", index);
-						//ĞèÒª½«Â·¾¶×Ö¶ÎÌí¼ÓÕıÈ·µÄË÷ÒıºÅ..
+						//éœ€è¦å°†è·¯å¾„å­—æ®µæ·»åŠ æ­£ç¡®çš„ç´¢å¼•å·..
 						pos = sprintf(bpath + bpathlen, "%s", x->name + pos)-1;
 						pos += sprintf(bpath + bpathlen + pos, "[%d]", index);
-						//ĞÂµÄ´øÊı×éÏÂ±êµÄÂ·¾¶ºÏ³ÉÍê±Ï..
+						//æ–°çš„å¸¦æ•°ç»„ä¸‹æ ‡çš„è·¯å¾„åˆæˆå®Œæ¯•..
 					}
 					else {
 						pos = sprintf(bpath + bpathlen, "%s", x->name + pos) - 1;
 					}
-					bpath[bpathlen + pos] = 0x00;//ĞŞÕı½áÎ²..ĞŞÕıÍê±Ï..
-					char *t = iniserialize_txt_ll(x->items, ref + x->size*index, flag|((x->type&INI_TYPE_ARRAY)? ISF_LL_ARRAY:0),bpath);//¼ÌĞø½øĞĞĞòÁĞ»¯..
+					bpath[bpathlen + pos] = 0x00;//ä¿®æ­£ç»“å°¾..ä¿®æ­£å®Œæ¯•..
+					char *t = iniserialize_txt_ll(x->items, ref + x->size*index, flag|((x->type&INI_TYPE_ARRAY)? ISF_LL_ARRAY:0),bpath);//ç»§ç»­è¿›è¡Œåºåˆ—åŒ–..
 					if (t!=NULL) {
-						//µÃµ½ÁË¾ßÌåµÄÊı¾İÁË..
-						//½øĞĞºÏ²¢¼´¿É..
+						//å¾—åˆ°äº†å…·ä½“çš„æ•°æ®äº†..
+						//è¿›è¡Œåˆå¹¶å³å¯..
 						int tn = strlen(t);
 						blen = ini_correction_memory(buf, blen, slen + tn + 4);
 						memcpy(buf + slen, t, tn);
@@ -956,13 +956,13 @@ char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,
 					}
 				}
 			}
-			else {//ÕâÊÇÒ»¸ö»ù±¾µÄ¶ÔÏó£¬¿ÉÒÔÖ±½Ó½øĞĞĞòÁĞ»¯..
+			else {//è¿™æ˜¯ä¸€ä¸ªåŸºæœ¬çš„å¯¹è±¡ï¼Œå¯ä»¥ç›´æ¥è¿›è¡Œåºåˆ—åŒ–..
 				index = 0; alen = x->cnt;
 				blen = (short)(ini_correction_memory(buf, blen, slen + strlen(x->name) + 64));
 				if (flag&ISF_LL_ARRAY) {
-					//¸¸½Úµã´æÔÚÊı×é..
-					//ĞèÒª½øĞĞ¾àÀëĞŞÕı..
-					//»ñÈ¡x->name½ÚµãÃû³ÆµÄ×îºóÒ»Ïî£¬Óë»ù±¾Â·¾¶ºÏ²¢¼´¿É..
+					//çˆ¶èŠ‚ç‚¹å­˜åœ¨æ•°ç»„..
+					//éœ€è¦è¿›è¡Œè·ç¦»ä¿®æ­£..
+					//è·å–x->nameèŠ‚ç‚¹åç§°çš„æœ€åä¸€é¡¹ï¼Œä¸åŸºæœ¬è·¯å¾„åˆå¹¶å³å¯..
 					int pos = ini_str_find_last_pp(x->name,-1);
 					if(pos<0)
 						continue;
@@ -971,8 +971,8 @@ char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,
 				else {
 					slen += sprintf(buf + slen, "\n%s,%d,%d,%d,", x->name, x->size, x->cnt, x->type);
 				}
-				if (x->type& INI_TYPE_STRING) {//×÷Îª×Ö·û´®½øĞĞ´¦Àí..
-											   //ĞèÒª±£Ö¤blen¿ÕÏĞÄÚ´æ´óÓÚ2±¶ÓÚx.cnt
+				if (x->type& INI_TYPE_STRING) {//ä½œä¸ºå­—ç¬¦ä¸²è¿›è¡Œå¤„ç†..
+											   //éœ€è¦ä¿è¯blenç©ºé—²å†…å­˜å¤§äº2å€äºx.cnt
 					blen = (short)(ini_correction_memory(buf, blen, slen + strlen(x->name) + 64 + x->cnt * 2));
 					re = initostring(x, (void *)((char*)handle + x->offset), buf + slen);
 					if (re > 0)
@@ -986,14 +986,14 @@ char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,
 					}
 					for (index = 0, alen = x->cnt; index < alen; index++)
 					{
-						//½«Êı¾İtostringÈ»ºóºÏ³É..
+						//å°†æ•°æ®tostringç„¶ååˆæˆ..
 						blen = ini_correction_memory(buf, blen, slen + 32);
 						re = initostring(x, (void *)((char*)handle + x->offset + x->size*index), buf + slen);
 						if (re > 0)
 						{
 							slen += re;
 						}
-						if (index < (alen - 1)) {//Ê¹ÓÃ·Ö¸ô·û½øĞĞ¸ôÀë..
+						if (index < (alen - 1)) {//ä½¿ç”¨åˆ†éš”ç¬¦è¿›è¡Œéš”ç¦»..
 							buf[slen++] = ',';
 						}
 					}
@@ -1012,11 +1012,11 @@ char* iniserialize_txt_ll(ini_list_type *dslists, const void *handle, uint flag,
 // Method:    iniserialize_to_txt
 // FullName:  iniserialize_to_txt
 // Access:    public 
-// Returns:   char* ĞòÁĞ»¯³É¹¦ºóµÄtxtÄÚ´æ
-// Qualifier: ĞòÁĞ»¯³ÉtxtÎÄ±¾¸ñÊ½µÄ·â×°
-// Parameter: ini_list_type * dslists iniitemÔËĞĞÊ±ÁĞ±í
-// Parameter: const void * handle ĞèÒªĞòÁĞ»¯µÄÄ¿±êÄÚ´æÆğµã
-// Parameter: uint flag ĞòÁĞ»¯Ñ¡Ïî£¬²Î¿¼@ini_serialize_flag
+// Returns:   char* åºåˆ—åŒ–æˆåŠŸåçš„txtå†…å­˜
+// Qualifier: åºåˆ—åŒ–æˆtxtæ–‡æœ¬æ ¼å¼çš„å°è£…
+// Parameter: ini_list_type * dslists iniitemè¿è¡Œæ—¶åˆ—è¡¨
+// Parameter: const void * handle éœ€è¦åºåˆ—åŒ–çš„ç›®æ ‡å†…å­˜èµ·ç‚¹
+// Parameter: uint flag åºåˆ—åŒ–é€‰é¡¹ï¼Œå‚è€ƒ@ini_serialize_flag
 //************************************
 char* iniserialize_to_txt(ini_list_type *dslists, const void *handle, uint flag) {
 	char *path = inimalloc(ini_path_maxlen);
@@ -1033,25 +1033,25 @@ char* iniserialize_to_txt(ini_list_type *dslists, const void *handle, uint flag)
 // FullName:  inidescrialize_txt_calc_value
 // Access:    public 
 // Returns:   int
-// Qualifier: ·´ĞòÁĞ»¯£¨txt£©¼ÆËã½ÚµãÖµ£¨´Ó×Ö·û´®£©
-// Parameter: void * handle Ä¿±êÄÚ´æ
-// Parameter: iniitem * item ÔËĞĞÊ±ĞÅÏ¢
-// Parameter: const char * value txt´«ÈëµÄ¶ÔÓ¦×Ö¶ÎµÄÖµµÄ×Ö·û´®
+// Qualifier: ååºåˆ—åŒ–ï¼ˆtxtï¼‰è®¡ç®—èŠ‚ç‚¹å€¼ï¼ˆä»å­—ç¬¦ä¸²ï¼‰
+// Parameter: void * handle ç›®æ ‡å†…å­˜
+// Parameter: iniitem * item è¿è¡Œæ—¶ä¿¡æ¯
+// Parameter: const char * value txtä¼ å…¥çš„å¯¹åº”å­—æ®µçš„å€¼çš„å­—ç¬¦ä¸²
 //************************************
 int inidescrialize_txt_calc_value(void *handle, iniitem *item, const char *value) {
 	//DBGF("\r\ndesc value:name=%s , type=%d ,offset = %d, value=%s", it->name, it->type,offset+it->offset, value);
-	//¸ù¾İÀàĞÍ½øĞĞ·´ĞòÁĞ»¯Êı¾İ..
+	//æ ¹æ®ç±»å‹è¿›è¡Œååºåˆ—åŒ–æ•°æ®..
 	uint type = item->type&INI_TYPE_ALL;
 	char*str = handle;
 	
 	ini_list_type *ss = ini_list_head();
 	int len = strlen(value), pos = 0, errocde = 0;
-	if (type == INI_TYPE_STRING) {//×Ö·û´®ĞèÒª½øĞĞÌØÊâ´¦Àí,»¹Ô­×ªÒå×Ö·û..
+	if (type == INI_TYPE_STRING) {//å­—ç¬¦ä¸²éœ€è¦è¿›è¡Œç‰¹æ®Šå¤„ç†,è¿˜åŸè½¬ä¹‰å­—ç¬¦..
 		pos = 0;
 		for (int i = 0; i < len && item->cnt>(i-1); i++)
 		{
 			if (value[i] == '\\') {
-				//ÕâÊÇÒ»¸ö×ªÒå×Ö·û..
+				//è¿™æ˜¯ä¸€ä¸ªè½¬ä¹‰å­—ç¬¦..
 				i++;
 				if (value[i] == 'r') {
 					str[pos++] = '\r';
@@ -1075,9 +1075,9 @@ int inidescrialize_txt_calc_value(void *handle, iniitem *item, const char *value
 		goto OVER;
 	}
 	if (item->type&INI_TYPE_ARRAY) {
-		//ÕâÊÇÒ»¸öÊı×éÔªËØ..
-		//Ñ°ÕÒ¿ªÊ¼ºÍ½áÊøµÄÎ»ÖÃ[1,2,3,4,5]//ÕâÑùµÄĞòÁĞ
-		//²ğ½â£¬²¢½«È«²¿ÔªËØÒ»¸ö¸öµÄ·´ĞòÁĞ»¯µ½Ä¿±êÄÚ´æ..
+		//è¿™æ˜¯ä¸€ä¸ªæ•°ç»„å…ƒç´ ..
+		//å¯»æ‰¾å¼€å§‹å’Œç»“æŸçš„ä½ç½®[1,2,3,4,5]//è¿™æ ·çš„åºåˆ—
+		//æ‹†è§£ï¼Œå¹¶å°†å…¨éƒ¨å…ƒç´ ä¸€ä¸ªä¸ªçš„ååºåˆ—åŒ–åˆ°ç›®æ ‡å†…å­˜..
 		char *s = strstr(value, "[");
 		if(s == NULL)
 		{
@@ -1088,7 +1088,7 @@ int inidescrialize_txt_calc_value(void *handle, iniitem *item, const char *value
 		{
 			errocde = -2; goto OVER;
 		}
-		s += 1;//´Ós¿ªÊ¼£¬µ½e½áÎ²£¬ÖĞ¼äµÄÔªËØÒÔ','×Ö·û·Ö¸î..
+		s += 1;//ä»så¼€å§‹ï¼Œåˆ°eç»“å°¾ï¼Œä¸­é—´çš„å…ƒç´ ä»¥','å­—ç¬¦åˆ†å‰²..
 		ini_list_type *arrays = __ini_ll_strtok(s, e - s, 1, ", ");
 		if (arrays == NULL) {
 			errocde = -3; goto OVER;
@@ -1097,7 +1097,7 @@ int inidescrialize_txt_calc_value(void *handle, iniitem *item, const char *value
 			ini_list_join(ss, arrays);
 			ini_list_reset(arrays);
 		}
-		ini_list_del(arrays);//È«²¿µÄÏî¶¼¼ÓÈëÁËssÁĞ±í£¬Ö±½ÓÊÍ·ÅarraysÖ¸Õë¼´¿É
+		ini_list_del(arrays);//å…¨éƒ¨çš„é¡¹éƒ½åŠ å…¥äº†ssåˆ—è¡¨ï¼Œç›´æ¥é‡Šæ”¾arraysæŒ‡é’ˆå³å¯
 	}
 	else {
 		ini_list_push_for_data(ss, value, 0, len+1);
@@ -1125,7 +1125,7 @@ int inidescrialize_txt_calc_value(void *handle, iniitem *item, const char *value
 				errocde = -4; goto OVER;
 			}break;
 		}
-		handle = ((char*)handle)+ (uint)item->size;//ÏòºóÒÆ¶¯ÄÚ´æ..
+		handle = ((char*)handle)+ (uint)item->size;//å‘åç§»åŠ¨å†…å­˜..
 		errocde++;
 	}
 OVER:
@@ -1138,7 +1138,7 @@ OVER:
 // FullName:  inidescrialize_txt_prase
 // Access:    public 
 // Returns:   int
-// Qualifier: ½âÎöÒ»¸ö×Ö¶ÎµÄÖµ²¢¸üĞÂÖÁÄ¿±êÄÚ´æ
+// Qualifier: è§£æä¸€ä¸ªå­—æ®µçš„å€¼å¹¶æ›´æ–°è‡³ç›®æ ‡å†…å­˜
 // Parameter: ini_list_type * dslists
 // Parameter: void * handle
 // Parameter: iniitem * item
@@ -1153,13 +1153,13 @@ int inidescrialize_txt_prase(ini_list_type *dslists, void *handle, iniitem*item,
 	char *vname = NULL,*ctmp=NULL;
 	do 
 	{
-		//ÖğÒ»½øĞĞÆ¥Åä
+		//é€ä¸€è¿›è¡ŒåŒ¹é…
 		ini_list_foreach_object(paths, char*, x) {
 			vindex++;
 			type = INI_TYPE_STRUCT;
 			if (index == (paths->count - 1)) {
-				//×îºóÒ»¸ö½Úµã..
-				//ĞèÒª²éÕÒµÄÊÇ»ù±¾½Úµã..
+				//æœ€åä¸€ä¸ªèŠ‚ç‚¹..
+				//éœ€è¦æŸ¥æ‰¾çš„æ˜¯åŸºæœ¬èŠ‚ç‚¹..
 				type = 0;
 			}
 			lcur = base;
@@ -1167,59 +1167,59 @@ int inidescrialize_txt_prase(ini_list_type *dslists, void *handle, iniitem*item,
 			epos = 0;
 			pos  = 0;
 			if ((ctmp = strchr(x, '[')) != NULL) {
-				pos = ((uint)ctmp - (uint)x);//¼ÆËã³öÊı×éÏÂ±ê¿ªÊ¼µÄÎ»ÖÃ..
+				pos = ((uint)ctmp - (uint)x);//è®¡ç®—å‡ºæ•°ç»„ä¸‹æ ‡å¼€å§‹çš„ä½ç½®..
 				if ((ctmp = strchr(ctmp, ']')) != NULL) {
 					epos = ((uint)ctmp - (uint)(x));
-					//¼ÆËãÕæÕıµÄposÏÂ±ê..
+					//è®¡ç®—çœŸæ­£çš„posä¸‹æ ‡..
 					x[epos] = 0X00;
-					spos = atoi(x + pos + 1);//»ñÈ¡µ½ÁËÂ·¾¶µÄÏÂ±ê..
+					spos = atoi(x + pos + 1);//è·å–åˆ°äº†è·¯å¾„çš„ä¸‹æ ‡..
 					x[epos] = ']';
 				}
-				x[pos] = 0x00;//Ä¨È¥Â·¾¶ÖĞÏÂ±êµÄ²¿·Ö..
-				(((ini_list_type*)x__temp)->count) = pos+1;//ĞŞÕı³¤¶È..
+				x[pos] = 0x00;//æŠ¹å»è·¯å¾„ä¸­ä¸‹æ ‡çš„éƒ¨åˆ†..
+				(((ini_list_type*)x__temp)->count) = pos+1;//ä¿®æ­£é•¿åº¦..
 			}
 			ini_list_foreach_object(base, iniitem*, it) {
 				lindex = -1;
-				if ((it->type&INI_TYPE_STRUCT) == INI_TYPE_STRUCT) {//ÕâÊÇÒ»¸ö½á¹¹Ìå½Úµã..
+				if ((it->type&INI_TYPE_STRUCT) == INI_TYPE_STRUCT) {//è¿™æ˜¯ä¸€ä¸ªç»“æ„ä½“èŠ‚ç‚¹..
 					lindex = -2;
 				}
 				lindex = ini_str_find_last_pp(it->name, lindex);
 				if(lindex <0)
 					continue;
 				vname = it->name + lindex;
-				//»ñÈ¡µ½½ÚµãÃû³ÆÁË..
+				//è·å–åˆ°èŠ‚ç‚¹åç§°äº†..
 				if (memcmp(x, vname+1, (((ini_list_type*)x__temp)->count - 1)) == 0x00) {
-					//ÃüÖĞ..
-					//ĞèÒªÔÙ´ÎÈ·ÈÏ×Ö·û´®ÊÇ·ñÍêÕûµÄÆ¥Åä..
+					//å‘½ä¸­..
+					//éœ€è¦å†æ¬¡ç¡®è®¤å­—ç¬¦ä¸²æ˜¯å¦å®Œæ•´çš„åŒ¹é…..
 					if (strlen(vname + 1) != ((((ini_list_type*)x__temp)->count) - ((it->type&INI_TYPE_STRUCT) == INI_TYPE_STRUCT ? 0 : 1))) {
-						//×Ö·û´®Î´ÄÜÍêÕûµÄ½øĞĞÆ¥Åä..
-						continue;//²»ÊÇĞèÒªµÄÄ¿±êÏî..
+						//å­—ç¬¦ä¸²æœªèƒ½å®Œæ•´çš„è¿›è¡ŒåŒ¹é…..
+						continue;//ä¸æ˜¯éœ€è¦çš„ç›®æ ‡é¡¹..
 					}
 					if ((it->type&INI_TYPE_STRUCT) != INI_TYPE_STRUCT && paths->count!=vindex) {
-						continue;//ÀàĞÍ²»Æ¥Åä..Ä¿Ç°»¹ĞèÒª½á¹¹Ìå½Úµã
+						continue;//ç±»å‹ä¸åŒ¹é…..ç›®å‰è¿˜éœ€è¦ç»“æ„ä½“èŠ‚ç‚¹
 					}
 					if ((it->type&INI_TYPE_STRUCT) == INI_TYPE_STRUCT && paths->count == vindex) {
-						continue;//ÀàĞÍ²»Æ¥Åä..Ä¿Ç°ĞèÒª»ù±¾½Úµã..
+						continue;//ç±»å‹ä¸åŒ¹é…..ç›®å‰éœ€è¦åŸºæœ¬èŠ‚ç‚¹..
 					}
 
 					base = it->items;
-					//¼ÆËãÄÚ´æoffset..
-					offset += it->size*spos;//ÕâÊÇ¼ÇÂ¼¸½¼ÓÆ«ÒÆ
+					//è®¡ç®—å†…å­˜offset..
+					offset += it->size*spos;//è¿™æ˜¯è®°å½•é™„åŠ åç§»
 					if ((it->type&INI_TYPE_STRUCT) != INI_TYPE_STRUCT) {
-						//ÕâÊÇÒ»¸ö»ù±¾µÄ½Úµã..
-						//Æ¥ÅäÀàĞÍÊÇ·ñÒ»ÖÂ..
+						//è¿™æ˜¯ä¸€ä¸ªåŸºæœ¬çš„èŠ‚ç‚¹..
+						//åŒ¹é…ç±»å‹æ˜¯å¦ä¸€è‡´..
 						if (item->type != it->type || it->size != item->size)
 						{
 							errcode = -1; break;
-						}//ÀàĞÍ²»Ò»ÖÂÎŞ·¨½øĞĞ·´ĞòÁĞ»¯..
+						}//ç±»å‹ä¸ä¸€è‡´æ— æ³•è¿›è¡Œååºåˆ—åŒ–..
 						if (it->cnt < spos)
 						{
 							errcode = -2; break;
-						}//×°²»ÏÂ£¬Õâ¸öÃèÊö±íÊ¾Ã»ÓĞ×ã¹»µÄÄÚ´æ´æ·Å..
-						//¿ªÊ¼½øĞĞ·´ĞòÁĞ»¯Ä¿±êÄÚ´æÎ´:it->offset+offset+handle
+						}//è£…ä¸ä¸‹ï¼Œè¿™ä¸ªæè¿°è¡¨ç¤ºæ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜å­˜æ”¾..
+						//å¼€å§‹è¿›è¡Œååºåˆ—åŒ–ç›®æ ‡å†…å­˜æœª:it->offset+offset+handle
 						errcode = inidescrialize_txt_calc_value((char*)handle + it->offset + offset, it, value);
 						if (errcode > 0)
-							it->hit = 1;//·´ĞòÁĞ»¯³É¹¦..
+							it->hit = 1;//ååºåˆ—åŒ–æˆåŠŸ..
 					}
 					break;
 				}
@@ -1227,7 +1227,7 @@ int inidescrialize_txt_prase(ini_list_type *dslists, void *handle, iniitem*item,
 			if(errcode<0)
 				break;
 			if (lcur == base) {
-				//ÎŞ·¨Æ¥ÅäµÄÂ·¾¶..
+				//æ— æ³•åŒ¹é…çš„è·¯å¾„..
 				errcode = -3; break;
 			}
 		}
@@ -1241,7 +1241,7 @@ int inidescrialize_txt_prase(ini_list_type *dslists, void *handle, iniitem*item,
 // FullName:  inidescrialize_txt_hit_clear
 // Access:    public 
 // Returns:   void
-// Qualifier: Çå³ıÔËĞĞÊ±ÁĞ±íÖĞiniitemµÄÃüÖĞ±ê¼Ç
+// Qualifier: æ¸…é™¤è¿è¡Œæ—¶åˆ—è¡¨ä¸­iniitemçš„å‘½ä¸­æ ‡è®°
 // Parameter: ini_list_type * base
 //************************************
 void inidescrialize_txt_hit_clear(ini_list_type *base) {
@@ -1260,7 +1260,7 @@ void inidescrialize_txt_hit_clear(ini_list_type *base) {
 // FullName:  inideserialize_from_txt
 // Access:    public 
 // Returns:   int
-// Qualifier: ĞòÁĞ»¯½á¹¹Ìåµ½txtÎÄ±¾¸ñÊ½£¨´Ë¸ñÊ½ÓÃÓÚiniÅäÖÃÎÄ¼şÊ¹ÓÃ£¬±ãÓÚvim¿ØÖÆÌ¨¸üĞÂÅäÖÃÎÄ¼ş£©
+// Qualifier: åºåˆ—åŒ–ç»“æ„ä½“åˆ°txtæ–‡æœ¬æ ¼å¼ï¼ˆæ­¤æ ¼å¼ç”¨äºinié…ç½®æ–‡ä»¶ä½¿ç”¨ï¼Œä¾¿äºvimæ§åˆ¶å°æ›´æ–°é…ç½®æ–‡ä»¶ï¼‰
 // Parameter: ini_list_type * dslists
 // Parameter: const char * msg
 // Parameter: void * handle
@@ -1276,10 +1276,10 @@ int inideserialize_from_txt(ini_list_type *dslists, const char *msg, void *handl
 	ini_list_type *list = ini_list_head();
 	iniitem item = { 0 };
 	if (flag&ISF_LL_FILL_ZERO) {
-		memset(handle, 0, size);//Ä¬ÈÏÇå¿ÕÄÚ´æ..
+		memset(handle, 0, size);//é»˜è®¤æ¸…ç©ºå†…å­˜..
 	}
 	if (flag&ISF_LL_MARK_HIT) {
-		inidescrialize_txt_hit_clear(dslists);//Çå¿ÕÃüÖĞ¼ÆÊıÆ÷..
+		inidescrialize_txt_hit_clear(dslists);//æ¸…ç©ºå‘½ä¸­è®¡æ•°å™¨..
 	}
 	int x = 0, s = 0;
 	for (int i = 0, j = 0,l=0; msg[i] != 0x00; i = j + 1)
@@ -1292,16 +1292,16 @@ int inideserialize_from_txt(ini_list_type *dslists, const char *msg, void *handl
 		}
 		if (i < j)
 		{
-			line = (char*)msg + i;//³¤¶ÈÎªj-i
+			line = (char*)msg + i;//é•¿åº¦ä¸ºj-i
 			l = j - i;
 			do
 			{
-				//¿ªÊ¼½øĞĞ½âÎöÕâĞĞµÄ¾ßÌåÄÚÈİ..
-				//Ö±½ÓÊ¹ÓÃÕâĞĞÊı¾İ¹¹ÔìÒ»¸öÊı¾İÏî..
+				//å¼€å§‹è¿›è¡Œè§£æè¿™è¡Œçš„å…·ä½“å†…å®¹..
+				//ç›´æ¥ä½¿ç”¨è¿™è¡Œæ•°æ®æ„é€ ä¸€ä¸ªæ•°æ®é¡¹..
 				for (x=0,s=0; x < l&&list->count<4; x++)
 				{
 					if (line[x] == ',') {
-						//½«Êı¾İÍÆÈë¶ÓÁĞ..
+						//å°†æ•°æ®æ¨å…¥é˜Ÿåˆ—..
 						ini_list_push_for_data(list, line, s, x - s+1);
 						ini_list_find_at(list, -1)->data[x - s] = 0x00;
 						s = x + 1;
@@ -1312,20 +1312,20 @@ int inideserialize_from_txt(ini_list_type *dslists, const char *msg, void *handl
 					ini_list_find_at(list, -1)->data[l - s] = 0x00;
 					value = ini_list_find_at(list, -1)->data;
 				}
-				//½«Êı¾İ½øĞĞ·Ö¸îÁË..
-				//ÅĞ¶ÏÊıÁ¿¶Ô²»¶Ô..
+				//å°†æ•°æ®è¿›è¡Œåˆ†å‰²äº†..
+				//åˆ¤æ–­æ•°é‡å¯¹ä¸å¯¹..
 				if(list->count<4|| list->next->data[0]!='.')
 					continue;
-				//¹¹ÔìÒ»¸öiniitem¶ÔÏó..
+				//æ„é€ ä¸€ä¸ªiniitemå¯¹è±¡..
 				memset(&item, 0, sizeof(item));
 				item.name = list->next->data;
 				item.size = atoi(ini_list_find_at(list,1)->data);
 				item.cnt  = atoi(ini_list_find_at(list, 2)->data);
 				item.type = atoi(ini_list_find_at(list, 3)->data);
-				//µÃµ½ÁËÒ»¸ö½Úµã..
-				//È·ÈÏÃû×ÖÖĞÊÇ·ñ´æÔÚ[]£¬ÒÔ´ËÀ´ĞŞÕıÄ¿±êÄÚ´æ..
+				//å¾—åˆ°äº†ä¸€ä¸ªèŠ‚ç‚¹..
+				//ç¡®è®¤åå­—ä¸­æ˜¯å¦å­˜åœ¨[]ï¼Œä»¥æ­¤æ¥ä¿®æ­£ç›®æ ‡å†…å­˜..
 				//DBGF("\r\ndesc:name=%s,size=%d,type=%d,type=%d,value=%s", item.name, item.size, item.cnt, item.type,value);
-				re=inidescrialize_txt_prase(dslists, handle, &item, value);//·´ĞòÁĞ»¯½âÎö..
+				re=inidescrialize_txt_prase(dslists, handle, &item, value);//ååºåˆ—åŒ–è§£æ..
 				if (re > 0) {
 					scnt++;
 				}
@@ -1340,14 +1340,14 @@ int inideserialize_from_txt(ini_list_type *dslists, const char *msg, void *handl
 	return scnt;
 }
 
-//INIJSONÖ¸Ê¾ÊÇ·ñÌá¹©cjsonĞòÁĞ»¯¹¦ÄÜ
+//INIJSONæŒ‡ç¤ºæ˜¯å¦æä¾›cjsonåºåˆ—åŒ–åŠŸèƒ½
 #if defined(INIJSON) && INIJSON!=0
 //************************************
 // Method:    _iniserialize_to_json_object
 // FullName:  _iniserialize_to_json_object
 // Access:    public 
 // Returns:   cJSON*
-// Qualifier: ĞòÁĞ»¯½á¹¹ÌåÖÁcjsonÀàĞÍ
+// Qualifier: åºåˆ—åŒ–ç»“æ„ä½“è‡³cjsonç±»å‹
 // Parameter: ini_list_type * dslists
 // Parameter: const void * handle
 // Parameter: uint flag
@@ -1363,7 +1363,7 @@ cJSON* _iniserialize_to_json_object(ini_list_type * dslists, const void * handle
 	INI_ERR_ASSERT_START();
 	INI_ASSERT(root&&dslists&&handle, -1);
 	ini_list_foreach_object(dslists, iniitem*, x) {
-		value = ( inivalue *)(x->offset + (handle));//Ä¿±êÄÚ´æ..
+		value = ( inivalue *)(x->offset + (handle));//ç›®æ ‡å†…å­˜..
 
 		pos = ini_str_find_last_pp(x->name, -1- __NAME_OFFSET_X(x));
 		nlen = strlen(x->name);
@@ -1372,14 +1372,14 @@ cJSON* _iniserialize_to_json_object(ini_list_type * dslists, const void * handle
 		name[nlen - pos - 1- __NAME_OFFSET_X(x)] = 0X00;
 
 
-		//±éÀúÃ¿Ò»¸ö½Úµã£¬½¨Á¢jsonÊ÷..
+		//éå†æ¯ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå»ºç«‹jsonæ ‘..
 		if ((x->type & INI_TYPE_ALL) == INI_TYPE_STRUCT) {
 			
 			cJSON *item = NULL;
-			if ((x->type&INI_TYPE_ARRAY) == 0x00) {//²»ÊÇÊı×é½Úµã..
+			if ((x->type&INI_TYPE_ARRAY) == 0x00) {//ä¸æ˜¯æ•°ç»„èŠ‚ç‚¹..
 				item = _iniserialize_to_json_object(x->items, handle, flag, err);
 			}
-			else {//Êı×é½Úµã..½øĞĞ±éÀú¹¹ÔìÃ¿Ò»¸ö½Úµã..
+			else {//æ•°ç»„èŠ‚ç‚¹..è¿›è¡Œéå†æ„é€ æ¯ä¸€ä¸ªèŠ‚ç‚¹..
 				item = cJSON_CreateArray();
 				INI_ASSERT(item, -2);
 				for (int i = 0; i < x->cnt; i++)
@@ -1396,8 +1396,8 @@ cJSON* _iniserialize_to_json_object(ini_list_type * dslists, const void * handle
 			
 			if ((x->type & INI_TYPE_ALL) == INI_TYPE_STRING) {
 				if (x->type&INI_TYPE_ARRAY) {
-					//»ù±¾ÀàĞÍµÄÊı×é..
-					//²»Ö§³Ö..
+					//åŸºæœ¬ç±»å‹çš„æ•°ç»„..
+					//ä¸æ”¯æŒ..
 				}
 				else {
 					cJSON_AddItemToObject(root, name, cJSON_CreateString(value->strvalue));
@@ -1462,7 +1462,7 @@ cJSON* _iniserialize_to_json_object(ini_list_type * dslists, const void * handle
 // FullName:  iniserialize_to_json
 // Access:    public 
 // Returns:   char *
-// Qualifier: ĞòÁĞ»¯½á¹¹ÌåÖÁjson×Ö·û´®
+// Qualifier: åºåˆ—åŒ–ç»“æ„ä½“è‡³jsonå­—ç¬¦ä¸²
 // Parameter: ini_list_type * dslists
 // Parameter: const void * handle
 // Parameter: uint flag
@@ -1482,7 +1482,7 @@ char * iniserialize_to_json(ini_list_type * dslists, const void * handle, uint f
 // FullName:  _inideserialize_from_json
 // Access:    public 
 // Returns:   int
-// Qualifier: ´Ó×Ö·û´®·´ĞòÁĞ»¯ÖÁcjson½á¹¹
+// Qualifier: ä»å­—ç¬¦ä¸²ååºåˆ—åŒ–è‡³cjsonç»“æ„
 // Parameter: ini_list_type * dslists
 // Parameter: const cJSON * root
 // Parameter: void * handle
@@ -1497,34 +1497,34 @@ int _inideserialize_from_json(ini_list_type * dslists, const cJSON*root, void * 
 	iniitem *iitem = NULL;
 	INI_ERR_ASSERT_START();
 	INI_ASSERT(dslists&&root&&handle&&size > 0&&(root->type== cJSON_Object||root->type== cJSON_Array), -1);
-	//±éÀúÃ¿Ò»¸öcjson½Úµã..
+	//éå†æ¯ä¸€ä¸ªcjsonèŠ‚ç‚¹..
 	for (cJSON *item = root->child; item; item=((item==NULL)?NULL:item->next))
 	{
-		//²éÕÒ¶ÔÓ¦µÄiniitem½Úµã..
+		//æŸ¥æ‰¾å¯¹åº”çš„iniitemèŠ‚ç‚¹..
 		iitem = ini_find_at(dslists, item->string, -1);
 		if (iitem == NULL)
 		{
 			if (errcnt)
 				errcnt[0] += 1;
-			continue;//Õâ¸öÏîÎŞ·¨Æ¥Åä..
+			continue;//è¿™ä¸ªé¡¹æ— æ³•åŒ¹é…..
 		}
-		if (item->type == cJSON_Object || (item->type == cJSON_Array && item->child->type== cJSON_Object)) {//½á¹¹Ìå»òÕß½á¹¹ÌåÊı×é..
-			//ÔÚdslistÖĞ²éÕÒÄ¿±ê½Úµã..
+		if (item->type == cJSON_Object || (item->type == cJSON_Array && item->child->type== cJSON_Object)) {//ç»“æ„ä½“æˆ–è€…ç»“æ„ä½“æ•°ç»„..
+			//åœ¨dslistä¸­æŸ¥æ‰¾ç›®æ ‡èŠ‚ç‚¹..
 			if (item->type == cJSON_Object) {
 				INI_ASSERT((stmp=_inideserialize_from_json(iitem->items, item, handle, size, errcnt, flag)) >= 0, -2);
 				scnt += stmp;
 			}
-			else {//½á¹¹ÌåÊı×é..
+			else {//ç»“æ„ä½“æ•°ç»„..
 				int i = 0;
 				for (cJSON*s = item->child; s!=NULL&&i<iitem->cnt;s=s->next, i++)
-				{//Êı×éÑ­»·½âÎö..
+				{//æ•°ç»„å¾ªç¯è§£æ..
 					INI_ASSERT((stmp=_inideserialize_from_json(iitem->items, s, handle + iitem->size*i, size, errcnt, flag)) >= 0, -3);
 					scnt += stmp;
 				}
 			}
 		}
-		else {//»ù±¾ÀàĞÍ..¿ªÊ¼½øĞĞ½âÎö..
-			//»ñÈ¡Õâ¸ö½ÚµãµÄÂ·¾¶..²¢ºÏ³É£¬²éÕÒ¶ÔÓ¦µÄdlist½Úµã..
+		else {//åŸºæœ¬ç±»å‹..å¼€å§‹è¿›è¡Œè§£æ..
+			//è·å–è¿™ä¸ªèŠ‚ç‚¹çš„è·¯å¾„..å¹¶åˆæˆï¼ŒæŸ¥æ‰¾å¯¹åº”çš„dlistèŠ‚ç‚¹..
 			value = (inivalue *)(handle + iitem->offset);
 			if (item->type == cJSON_Array) {
 				item = item->child;
@@ -1563,10 +1563,10 @@ int _inideserialize_from_json(ini_list_type * dslists, const cJSON*root, void * 
 				}
 				else if ((iitem->type&INI_TYPE_ALL) == INI_TYPE_STRING) {
 					int maxlen = strlen(item->valuestring);
-					maxlen = maxlen >= iitem->cnt ? (iitem->cnt - 1) : (maxlen);//»ñÈ¡¿ÉÒÔ´æ·ÅµÄ×î´ó³ß´ç..
+					maxlen = maxlen >= iitem->cnt ? (iitem->cnt - 1) : (maxlen);//è·å–å¯ä»¥å­˜æ”¾çš„æœ€å¤§å°ºå¯¸..
 					memcpy(value->strvalue, item->valuestring, maxlen);
 					value->strvalue[maxlen] = 0x00;
-					break;//ÒòÎªcnt>1ĞèÒªÌø³öÈ¥..
+					break;//å› ä¸ºcnt>1éœ€è¦è·³å‡ºå»..
 				}
 				else {
 					if (errcnt)
@@ -1589,13 +1589,13 @@ int _inideserialize_from_json(ini_list_type * dslists, const cJSON*root, void * 
 // Method:    inideserialize_from_json
 // FullName:  inideserialize_from_json
 // Access:    public 
-// Returns:   int ³É¹¦Æ¥Åä²¢¸üĞÂµÄ×Ö¶ÎÊıÁ¿
-// Qualifier: ´Ó×Ö·û´®·´ĞòÁĞ»¯ÖÁ½á¹¹Ìå
+// Returns:   int æˆåŠŸåŒ¹é…å¹¶æ›´æ–°çš„å­—æ®µæ•°é‡
+// Qualifier: ä»å­—ç¬¦ä¸²ååºåˆ—åŒ–è‡³ç»“æ„ä½“
 // Parameter: ini_list_type * dslists
 // Parameter: const char * json
 // Parameter: void * handle
 // Parameter: uint size
-// Parameter: int * errcnt ×Ö·û´®ÖĞÎ´ÄÜÓëdslistsÃèÊöµÄÔËĞĞÊ±³É¹¦Æ¥ÅäµÄ×Ö¶ÎÊıÁ¿
+// Parameter: int * errcnt å­—ç¬¦ä¸²ä¸­æœªèƒ½ä¸dslistsæè¿°çš„è¿è¡Œæ—¶æˆåŠŸåŒ¹é…çš„å­—æ®µæ•°é‡
 // Parameter: uint flag
 //************************************
 int inideserialize_from_json(ini_list_type * dslists, const char *json, void * handle, uint size, int * errcnt, uint flag)
@@ -1614,7 +1614,7 @@ int inideserialize_from_json(ini_list_type * dslists, const char *json, void * h
 // FullName:  iniparse_test
 // Access:    public 
 // Returns:   int
-// Qualifier: ²âÊÔ
+// Qualifier: æµ‹è¯•
 //************************************
 int iniparse_test() {
 	ini_list_type *dlist = inimake(inimsg);
@@ -1706,7 +1706,7 @@ int iniparse_test2() {
 			printf("\r\ndeserialize result=%s , c = %d\r\n", c == 0 ? "success" : "failed", c);
 		}
 		inifree(buf);
-		inidel(dlist);
 	}
+	inidel(dlist);
 
 }
