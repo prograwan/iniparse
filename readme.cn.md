@@ -5,6 +5,8 @@
 		在iniparse。c文件中存在一个iniparse_test函数是一个非常复杂的综合测试用例
 	
 测试用例2:
+
+
 	#include"iniparse.h"
 	
 	//定义一个结构体
