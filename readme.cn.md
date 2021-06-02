@@ -18,12 +18,12 @@
 
 # 配置与移植
 * iniconfig.h是一个为用户准备的空文件，当用户需要自定义某些实现时可以修改此文件
-* INIJSON宏:默认==1,此时必须提供cjson源代码（因为本项目此时依赖他，否则请定义INIJSON=0）
+* INIJSON宏:<font color='red'> 默认==1,此时必须提供cjson源代码（因为本项目此时依赖它，否则请定义INIJSON=0） </font>
 * INIPORTENABLE宏:默认==0,代表使用iniparse内置的实现算法，当INIPORTENABLE!=0时用户必须提供算法实现
 
 
 # 测试用例
-* exp1: 在iniparse。c文件中存在一个iniparse_test函数是一个非常复杂的综合测试用例
+* exp1: 在iniparse.c文件中存在一个iniparse_test函数是一个非常复杂的综合测试用例
 * 
 * exp2: 
 ```exp2

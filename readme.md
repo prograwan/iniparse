@@ -19,7 +19,7 @@ In use if you have any question, welcome to feedback to me
 Iniconfig.H is an empty file for the user, when users need to customize some implementation can modify this file
 
 
-* INIJSON macro: default = = 1, cjson source code must be provided at this time (because the project depend on him at this time, otherwise please define INIJSON = 0)
+* INIJSON macro: <font color='red'> default = = 1, cjson source code must be provided at this time (because the project depend on him at this time, otherwise please define INIJSON = 0) </font>
 * INIPORTENABLE macro: default = = 0, for using iniparse built-in the implementation of the algorithm, when INIPORTENABLE!= 0 when the user must provide algorithm implementation
 
 ---
