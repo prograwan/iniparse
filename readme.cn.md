@@ -16,7 +16,7 @@
 * 邮件(431159416@qq.com)
 
 
-#配置与移植
+# 配置与移植
 * iniconfig.h是一个为用户准备的空文件，当用户需要自定义某些实现时可以修改此文件
 * INIJSON宏:默认==1,此时必须提供cjson源代码（因为本项目此时依赖他，否则请定义INIJSON=0）
 * INIPORTENABLE宏:默认==0,代表使用iniparse内置的实现算法，当INIPORTENABLE!=0时用户必须提供算法实现
